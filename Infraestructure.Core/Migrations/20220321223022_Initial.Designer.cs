@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Core.Migrations
 {
     [DbContext(typeof(ContextSql))]
-    [Migration("20220321210607_Initial")]
+    [Migration("20220321223022_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace Infraestructure.Core.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.3");
+                .HasAnnotation("ProductVersion", "5.0.12");
 
             modelBuilder.Entity("Infraestructure.Model.Entity.Roles", b =>
                 {
@@ -102,7 +102,7 @@ namespace Infraestructure.Core.Migrations
             modelBuilder.Entity("Infraestructure.Model.Entity.UserToRol", b =>
                 {
                     b.HasOne("Infraestructure.Model.Entity.Roles", "Roles")
-                        .WithMany("UserToRols")
+                        .WithMany()
                         .HasForeignKey("RolesID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -116,11 +116,6 @@ namespace Infraestructure.Core.Migrations
                     b.Navigation("Roles");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Infraestructure.Model.Entity.Roles", b =>
-                {
-                    b.Navigation("UserToRols");
                 });
 
             modelBuilder.Entity("Infraestructure.Model.Entity.User", b =>
